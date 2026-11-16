@@ -54,6 +54,31 @@ func TestWordWrap(t *testing.T) {
 			9,
 			true,
 		},
+		// Hyphenated words do not exceed the limit:
+		{
+			"foo foo-foobar",
+			"foo\nfoo-\nfoobar",
+			7,
+			true,
+		},
+		{
+			"foo foob-bar",
+			"foo\nfoob-\nbar",
+			5,
+			true,
+		},
+		{
+			"foo-bar-baz",
+			"foo-\nbar-baz",
+			7,
+			true,
+		},
+		{
+			"foo -bar",
+			"foo\n-bar",
+			4,
+			true,
+		},
 		// Lines are broken at whitespace, even if words
 		// are too long. We do not break words:
 		{
